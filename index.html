@@ -15,7 +15,22 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #f0f0f0;
+      background-image: url('images/qrCodeBg.webp');
+  background-size: cover; /* Adjust the size as needed */
+  background-repeat: no-repeat; /* Prevents repeating the image */
+  background-position: center center; /* Centers the background image */
+
+  body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5); /* White overlay with 50% opacity */
+  z-index: -1; /* Ensure the overlay is behind content */
+}
+
     }
     #qrcode-container {
       display: flex;
@@ -89,7 +104,7 @@
 <body>
   <h1>QR Code Generator</h1>
   <form id="qrForm">
-    <input type="text" id="text" placeholder="Enter text" required>
+    <input type="text" id="text" placeholder="Enter text or Link" required>
     <select id="pixelShape">
       <option value="square">Square</option>
       <option value="dots">Dots</option>
