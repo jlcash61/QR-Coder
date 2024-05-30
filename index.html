@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR Code Generator</title>
-  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
       flex-direction: column;
       align-items: center;
     }
-    input[type="text"], select {
+    input[type="text"] {
       width: 300px;
       height: 40px;
       font-size: 18px;
@@ -52,14 +52,6 @@
   <h1>QR Code Generator</h1>
   <form id="qrForm">
     <input type="text" id="text" placeholder="Enter text" required>
-    <select id="pixelShape">
-      <option value="square">Square</option>
-      <option value="dots">Dots</option>
-      <option value="rounded">Rounded</option>
-      <option value="classy">Classy</option>
-      <option value="classy-rounded">Classy Rounded</option>
-      <option value="extra-rounded">Extra Rounded</option>
-    </select>
     <button type="submit">Generate QR Code</button>
   </form>
   <div id="qrcode"></div>
@@ -68,35 +60,8 @@
     document.getElementById('qrForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const qrText = document.getElementById('text').value;
-      const pixelShape = document.getElementById('pixelShape').value;
       document.getElementById('qrcode').innerHTML = '';
-      
-      const qrCode = new QRCodeStyling({
-        width: 300,
-        height: 300,
-        data: qrText,
-        dotsOptions: {
-          color: "#000000",
-          type: pixelShape // Use selected pixel shape
-        },
-        backgroundOptions: {
-          color: "#ffffff",
-        },
-        cornersSquareOptions: {
-          color: "#000000",
-          type: "square" // Same pixel shape for corners
-        },
-        cornersDotOptions: {
-          color: "#000000",
-          type: "square" // Same pixel shape for corners
-        },
-        imageOptions: {
-          crossOrigin: "anonymous",
-          margin: 0
-        }
-      });
-
-      qrCode.append(document.getElementById('qrcode'));
+      new QRCode(document.getElementById('qrcode'), qrText);
     });
   </script>
 </body>
