@@ -4,102 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR Code Generator</title>
+  <link rel="icon" href="/images/qr64.png" type="image/png" sizes="64x64">
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="manifest" href="manifest.json">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-image: url('images/qrCodeBg.webp');
-  background-size: cover; /* Adjust the size as needed */
-  background-repeat: no-repeat; /* Prevents repeating the image */
-  background-position: center center; /* Centers the background image */
-
-  body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5); /* White overlay with 50% opacity */
-  z-index: -1; /* Ensure the overlay is behind content */
-}
-
-    }
-    #qrcode-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px; /* Space between QR codes */
-    }
-    .qrcode-box {
-      display: none; /* Hide initially */
-      flex-direction: column;
-      align-items: center;
-      background-color: #ffffff;
-      border: 2px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      margin: 20px 0;
-    }
-    .qrcode-inner {
-      background-color: #ffffff;
-      padding: 10px;
-      border: 2px solid #ffffff;
-      border-radius: 5px;
-    }
-    .qrcode-description {
-      margin-top: 10px;
-      text-align: center;
-      width: 300px;
-      word-wrap: break-word;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    input[type="text"], select {
-      width: 300px;
-      height: 40px;
-      font-size: 18px;
-      margin-bottom: 20px;
-      padding: 5px;
-      border: 2px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-    label {
-      font-size: 18px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-    }
-    input[type="checkbox"] {
-      width: 20px; /* Smaller width */
-      height: 20px; /* Smaller height */
-      margin-right: 10px; /* Space between checkbox and label text */
-    }
-    button {
-      width: 200px;
-      height: 50px;
-      font-size: 18px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+  
+ 
 </head>
 <body>
   <h1>QR Code Generator</h1>
@@ -129,62 +40,19 @@
     </div>
   </div>
 
+  <script src="src/app.js"></script>
   <script>
-    function generateQRCode(text, shape, includeBasic) {
-      document.getElementById('qrcode').innerHTML = '';
-      document.getElementById('qrcodeStyled').innerHTML = '';
-
-      if (includeBasic) {
-        const basicQRContainer = document.createElement('div');
-        basicQRContainer.style.backgroundColor = '#ffffff';
-        basicQRContainer.style.padding = '10px';
-        basicQRContainer.style.border = '2px solid #ffffff';
-        basicQRContainer.style.borderRadius = '5px';
-
-        new QRCode(basicQRContainer, {
-          text: text,
-          width: 300,
-          height: 300,
-          colorDark: "#000000",
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.H
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('src/service-worker.js').then((registration) => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, (error) => {
+          console.log('ServiceWorker registration failed: ', error);
         });
-
-        document.getElementById('qrcode').appendChild(basicQRContainer);
-        document.getElementById('basicQRBox').style.display = 'flex'; // Show the basic QR code box
-      }
-
-      const qrCodeStyled = new QRCodeStyling({
-        width: 300,
-        height: 300,
-        data: text,
-        margin: 10,
-        qrOptions: {
-          errorCorrectionLevel: 'Q'
-        },
-        dotsOptions: {
-          color: "#000000",
-          type: shape,
-        },
-        backgroundOptions: {
-          color: "#ffffff",
-        },
-        cornersSquareOptions: {
-          color: "#000000",
-          type: (shape === 'square' || shape === 'dots') ? 'square' : 'rounded',
-        }
       });
-      qrCodeStyled.append(document.getElementById('qrcodeStyled'));
-      document.getElementById('styledQRBox').style.display = 'flex'; // Show the styled QR code box
     }
-
-    document.getElementById('qrForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const qrText = document.getElementById('text').value;
-      const pixelShape = document.getElementById('pixelShape').value;
-      const includeBasic = document.getElementById('includeBasic').checked;
-      generateQRCode(qrText, pixelShape, includeBasic);
-    });
   </script>
+  
+
 </body>
 </html>
