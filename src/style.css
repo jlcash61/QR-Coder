@@ -6,7 +6,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-image: url('/./images/qrCodeBg.webp');
+    background-image: url('./images/qrCodeBg.webp');
 background-size: cover; /* Adjust the size as needed */
 background-repeat: no-repeat; /* Prevents repeating the image */
 background-position: center center; /* Centers the background image */
