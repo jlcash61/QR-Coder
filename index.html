@@ -40,11 +40,11 @@
     </div>
   </div>
 
-  <script src="https:github.com/jlcash61/QR-Code/src/app.js"></script>
+  <script src="src/app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('src/service-worker.js').then((registration) => {
+        navigator.serviceWorker.register('/QR-Coder/src/service-worker.js').then((registration) => {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, (error) => {
           console.log('ServiceWorker registration failed: ', error);
