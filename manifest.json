@@ -1,7 +1,7 @@
 {
     "name": "QR Code App",
     "short_name": "QRApp",
-    "start_url": "/",
+    "start_url": "/QR-Code",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
