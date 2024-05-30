@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR Code Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -61,7 +61,21 @@
       event.preventDefault();
       const qrText = document.getElementById('text').value;
       document.getElementById('qrcode').innerHTML = '';
-      new QRCode(document.getElementById('qrcode'), qrText);
+      
+      const qrCode = new QRCodeStyling({
+        width: 300,
+        height: 300,
+        data: qrText,
+        dotsOptions: {
+          color: "#000000",
+          type: "rounded" // Other options: 'rounded', 'dots', 'classy', 'classy-rounded', 'square', 'extra-rounded'
+        },
+        backgroundOptions: {
+          color: "#ffffff",
+        }
+      });
+
+      qrCode.append(document.getElementById('qrcode'));
     });
   </script>
 </body>
