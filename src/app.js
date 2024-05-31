@@ -1,8 +1,10 @@
+const shareButton = document.getElementById('shareButton');
+  shareButton.classList.add('hidden'); // Ensure share button is hidden initially
+
 function generateQRCode(text, shape, includeBasic) {
   document.getElementById('qrcode').innerHTML = '';
   document.getElementById('qrcodeStyled').innerHTML = '';
-  const shareButton = document.getElementById('shareButton');
-  shareButton.classList.add('hidden'); // Ensure share button is hidden initially
+  
 
   if (includeBasic) {
       const basicQRContainer = document.createElement('div');
