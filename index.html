@@ -9,8 +9,6 @@
   <link rel="manifest" href="manifest.json">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-  
- 
 </head>
 <body>
   <h1>QR Code Generator</h1>
@@ -39,7 +37,7 @@
       <div class="qrcode-description">Styled QR Code</div>
     </div>
   </div>
-
+  <button id="shareButton" class="hidden">Share QR Code</button>
   <script src="src/app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
@@ -52,7 +50,5 @@
       });
     }
   </script>
-  
-
 </body>
 </html>
